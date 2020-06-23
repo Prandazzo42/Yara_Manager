@@ -1,6 +1,6 @@
 {% include "ruleManager/navBar.html" %}
 
-<form method="post" action="{% url 'upload_rule'%}" enctype="multipart/form-data">
+<form method="post" action="{% url 'test_file'%}" enctype="multipart/form-data">
 {% csrf_token %}
 {{ form.as_ul }}
 
@@ -13,7 +13,7 @@
     {% endfor %}
     </ul>
 
-<input type="submit" value="upload" />
+<input type="submit" value="test file" />
 </form>
 
 {{ response }}

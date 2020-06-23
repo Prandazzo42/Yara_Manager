@@ -1,6 +1,10 @@
 
 from django import forms
+from .models import *
 
-class UploadRuleForm(forms.Form):
+class UploadFileForm(forms.Form):
     file = forms.FileField()
+
+class CreateTag(forms.Form):
+    newTag = forms.CharField(max_length=128)
 

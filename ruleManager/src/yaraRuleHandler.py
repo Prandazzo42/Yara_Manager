@@ -6,7 +6,7 @@ class YaraRuleHandler(object):
         self.file = file
 
 
-    def test_file(self):
+    def test_compilation(self):
         try:
             rule = yara.compile(self.file)
             return True
@@ -14,6 +14,3 @@ class YaraRuleHandler(object):
             print("error")
             return False
 
-    def show_file(self):
-        rule = yara.compile(self.file)
-        print(rule)

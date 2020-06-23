@@ -22,6 +22,9 @@ class FileUploader(object):
     def get_path(self):
         return self.nameFile
 
+    def get_name(self):
+        return self.nameFile.split("/")[-1]
+
     def delete_file(self):
         os.unlink(self.nameFile)
 

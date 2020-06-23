@@ -1,0 +1,25 @@
+{% include "ruleManager/navBar.html" %}
+
+<h2 style="padding: 5px;">Create Tag</h2>
+<form method="post" action="{% url 'edit_tag'%}">
+    {% csrf_token %}
+    {{form.as_ul}}
+    <input type="submit" value="créer" />
+</form>
+{{response}}
+
+<h2 style="padding: 5px;">Tags</h2>
+<table>
+    <tr>
+        <td>tag</td>
+        <td>delete</td>
+    </tr>
+    {% for tag in tags %}
+    <tr>
+        <td>{{tag.tag}}</td>
+        <td><a href="{% url 'delete_tag' tag.id %}">delete</a></td>
+    </tr>
+    {%endfor%}
+</table>
+
+

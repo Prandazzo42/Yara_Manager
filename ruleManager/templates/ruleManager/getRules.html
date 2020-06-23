@@ -1,0 +1,55 @@
+{% include "ruleManager/navBar.html" %}
+
+<h2 style="padding: 5px;">Rules</h2>
+<input type="text" id="searchBar" onkeyup="searchFunction()" placeholder="Search for tags..">
+<table id="ruleTable">
+    <tr>
+        <td>rule</td>
+        <td>tags</td>
+        <td>export</td>
+        <td>edit</td>
+        <td>delete</td>
+    </tr>
+    {% for rule in rules %}
+    <tr>
+        <td>{{rule.name}}</td>
+        <td>
+            <ul style="list-style-type:none;">
+            {% for ruleTag in ruleTags %}
+                {% if ruleTag.rule_id == rule.id %}
+                    {% for tag in tags %}
+                        {% if tag.id == ruleTag.tag_id %}
+                        <li id="{{tag.tag}}">{{tag.tag}}</li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </td>
+        <td><a href="{% url 'export_rule' rule.id %}">export</a></td>
+        <td><a href="{% url 'edit_rule' rule.id %}">edit</a></td>
+        <td><a href="{% url 'delete_rule' rule.id %}">delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<script>
+function searchFunction() {
+    var txtValue, splitFilters;
+    var input = document.getElementById("searchBar");
+    var filter = input.value.toUpperCase();
+    var table = document.getElementById("ruleTable");
+    var tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            } else {
+            tr[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>
