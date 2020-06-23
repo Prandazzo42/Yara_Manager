@@ -1,24 +1,20 @@
 {% include "ruleManager/navBar.html" %}
 
-Rule:
-{{rule.name}}
+Rule: {{rule.name}}
 
 <h3>Tags</h3>
 <form method="post" action="{% url 'edit_rule' rule.id%}">
 {% csrf_token %}
-    <ul style="list-style-type:none;">
+    <div class="checkbox">
     {% for tag in tags %}
-        <li style="display: inline;">
-            <input type="checkbox" id="{{tag.id}}" name="tag" value="{{tag.id}}"
+            <label><input type="checkbox" id="{{tag.id}}" name="tag" value="{{tag.id}}"
             {% for ruleTag in ruleTags %} 
             {% if tag.id == ruleTag.tag_id  %}
             checked
             {% endif %}
             {% endfor %}
-            >
-            <label for="{{tag.tag}}"> {{tag.tag}}</label><br>
-        </li>
+            >{{tag.tag}}</label>
     {% endfor %}
-    </ul>
+    </div>
     <input type="submit" value="Add Tag">
 </form>

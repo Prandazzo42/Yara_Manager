@@ -3,14 +3,16 @@
 <h2 style="padding: 5px;">Create Tag</h2>
 <form method="post" action="{% url 'edit_tag'%}">
     {% csrf_token %}
-    {{form.as_ul}}
+    <div class="form-group">
+        {{form}}
+    </div>
     <input type="submit" value="créer" />
 </form>
 {{response}}
 
 <h2 style="padding: 5px;">Tags</h2>
-<table>
-    <tr>
+<table class="table">
+    <tr style="font-weight:bold;">
         <td>tag</td>
         <td>delete</td>
     </tr>

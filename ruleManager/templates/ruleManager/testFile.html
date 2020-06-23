@@ -2,18 +2,40 @@
 
 <form method="post" action="{% url 'test_file'%}" enctype="multipart/form-data">
 {% csrf_token %}
-{{ form.as_ul }}
-
-<ul style="list-style-type:none;">
+    <div class="form-group">
+    {{ form }}
+    </div>
+    <div class="checkbox">
     {% for tag in tags %}
-        <li style="display: inline;">
-            <input type="checkbox" id="{{tag.id}}" name="tag" value="{{tag.id}}">
-            <label for="{{tag.tag}}"> {{tag.tag}}</label><br>
-        </li>
+            <label><input type="checkbox" id="{{tag.id}}" name="tag" value="{{tag.id}}"> {{tag.tag}}</label><br>
     {% endfor %}
-    </ul>
+    </div>
 
 <input type="submit" value="test file" />
 </form>
 
 {{ response }}
+{% if  result.success%}
+    <br>
+    <div>
+        Matching Rules:
+    </div>
+    <br>
+    {% if result.matchingRules.items %}
+        {{result.matchingRules.items | length}} Rules tested
+    {% endif %}
+    <br>
+    <div>
+        <ul class="list-group">
+            {% for file, matchingRule in result.matchingRules.items %}
+                {% if  matchingRule.0 %}
+                <li class="list-group-item">{{file}}: {{matchingRule}}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        Duration:
+        {{result.duration}}
+    </div>
+{% endif %}

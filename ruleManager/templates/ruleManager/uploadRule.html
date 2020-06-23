@@ -2,16 +2,14 @@
 
 <form method="post" action="{% url 'upload_rule'%}" enctype="multipart/form-data">
 {% csrf_token %}
-{{ form.as_ul }}
-
-<ul style="list-style-type:none;">
+<div class="form-group">
+    {{ form }}
+</div>
+<div class="checkbox">
     {% for tag in tags %}
-        <li style="display: inline;">
-            <input type="checkbox" id="{{tag.id}}" name="tag" value="{{tag.id}}">
-            <label for="{{tag.tag}}"> {{tag.tag}}</label><br>
-        </li>
+            <label><input type="checkbox" id="{{tag.id}}" name="tag" value="{{tag.id}}">{{tag.tag}}</label>
     {% endfor %}
-    </ul>
+</div>
 
 <input type="submit" value="upload" />
 </form>
